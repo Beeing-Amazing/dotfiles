@@ -7,8 +7,8 @@ return {
 
         vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = "Telescope find file" } )
         vim.keymap.set("n", "<leader>pg", builtin.git_files, { desc = "Telescope find git files" } )
-        -- vim.keymap.set("n", "<leader>ps", function()
-        --     builtin.grep_string( { search = vim.fn.input("Grep > ") } )
-        -- end, { desc = "Telescope grep string" } )
+        vim.keymap.set("n", "<leader>ps", function()
+            builtin.grep_string( { search = vim.fn.input("Grep > ") } )
+        end, { desc = "Telescope grep string" } )
     end
 }
