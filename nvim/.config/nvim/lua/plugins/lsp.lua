@@ -10,7 +10,7 @@ return {
                 "clangd", -- c++
                 {
                     init_options = {
-                        fallbackFlags = { "--std=c17" }
+                        fallbackFlags = { "--std=c++17" }
                     }
                 }
             },
