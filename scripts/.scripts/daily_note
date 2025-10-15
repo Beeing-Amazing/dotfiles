@@ -26,8 +26,8 @@ newnote () { \
 }
 
 exists () { \
-    datepath="$(date +%Y/%m/%d)"
-    created="$(command find "$folder" -type f -printf "%P\n" | grep "$datepath" | head -1)"
+    datepath="$(date +%Y/%m/%d_daily)"
+created="$(find "$folder" -type f -printf "%P\n" | grep "$datepath" | head -1)"
 if [[ -n "$created" ]]; then
     opennote
 else
