@@ -19,7 +19,7 @@ window#waybar {
     color: #ffffff;
 }
 #workspaces button.active {
-    background: #89dfeb;
+    background: #c0caf5;
     color: #171717;
 }
 
