@@ -31,10 +31,10 @@ bare () { \
 }
 
 ext () { \
-    ext=$(echo -e "New\nmd\ntyp" | dmenu -c -l 3 -i -p "Choose file type: " )
+    ext=$(echo -e "Bare\nmd\ntyp" | dmenu -c -l 3 -i -p "Choose file type: " )
     [ -z "$ext" ] && exit 0
 case $ext in
-    New) bare ;;
+    Bare) bare ;;
     *) newnote "$ext";;
 esac
 }
