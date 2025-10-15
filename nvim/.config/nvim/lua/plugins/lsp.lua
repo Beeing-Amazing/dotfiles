@@ -7,6 +7,13 @@ return {
         lsp.marksman.setup({}) -- markdown
         lsp.clangd.setup({}) -- c++
         lsp.jedi_language_server.setup({}) -- python
+        lsp.tinymist.setup({ -- typst
+            settings = {
+                formatterMode = "typstyle",
+                exportPdf = "onType",
+                semanticTokens = "disable"
+            }
+        })
 
 
         vim.diagnostic.config({

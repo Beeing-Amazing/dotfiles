@@ -4,6 +4,8 @@
 folder="$HOME/Notes/"
 terminal=kitty
 
+# TODO: newnote in parent folder based on date, acc to old format
+
 
 newnote () { \
     ext="$1"
@@ -16,6 +18,10 @@ newnote () { \
     mkdir -p "$fullpath"
 
     setsid -f $terminal -e nvim "$fullpath/$filename" >/dev/null 2>&1 && notify-send "New note created"
+    wait
+    if [ $ext = "typ" && ]; then
+        typst watch "$fullpath/$filename" >/dev/null 2>&1
+    fi
 }
 
 ext () { \
