@@ -1,0 +1,5 @@
+#!/bin/sh
+# thanks to https://bbs.archlinux.org/viewtopic.php?pid=777137#p777137
+
+pass=$(dmenu -c -p "Input password: " -nf '#005577' -nb '#005577' <&-)
+echo $pass
