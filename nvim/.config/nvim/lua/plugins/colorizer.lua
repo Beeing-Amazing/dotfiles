@@ -1,4 +1,9 @@
 return {
     "norcalli/nvim-colorizer.lua",
-    opts = { '*' }
+    config = function()
+        require("colorizer").setup({
+            "*", -- enable for all filetypes
+            markdown = { names = false }, -- override specific behavior
+        })
+    end
 }

@@ -6,6 +6,7 @@ these may or may not be up-to-date
 
 # toolset
 
+- Distro: Arch Linux
 - WM: Hyprland
 - Status: waybar
 - Terminal Emulator: kitty
