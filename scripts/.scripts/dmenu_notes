@@ -18,10 +18,10 @@ newnote () { \
     mkdir -p "$fullpath"
 
     setsid -f $terminal -e nvim "$fullpath/$filename" >/dev/null 2>&1 && notify-send "New note created"
-    wait
-    if [ $ext = "typ" && ]; then
-        typst watch "$fullpath/$filename" >/dev/null 2>&1
-    fi
+    # wait
+    # if [ $ext = "typ" && ]; then
+    #     typst watch "$fullpath/$filename" >/dev/null 2>&1
+    # fi
 }
 
 bare () { \
