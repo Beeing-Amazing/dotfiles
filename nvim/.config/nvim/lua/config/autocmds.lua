@@ -16,3 +16,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         vim.highlight.on_yank({ timeout = 300 })
     end,
 })
+
+-- filetype specific keymaps
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "typst",
+    callback = function()
+        -- autopairs
+        vim.keymap.set("i", "$", "$$<Esc>i", {buffer = true})
+    end
+})
