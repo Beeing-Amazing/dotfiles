@@ -23,7 +23,7 @@ return {
                         semanticTokens = "disable"
                     }
                 }
-            }, 
+            },
         }
 
         for _, lsp in pairs(lsps) do
