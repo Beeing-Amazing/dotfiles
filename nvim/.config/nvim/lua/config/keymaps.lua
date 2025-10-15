@@ -28,8 +28,8 @@ vim.keymap.set("n", "x", '"_x', opts)
 -- keep paste buffer when pasting over selected text
 vim.keymap.set("x", "<leader>p", "\"_dP")
 -- yank into system clipboard
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
+vim.keymap.set("n", "<leader>y", "\"+y", { desc = "Yank into system clipboard" })
+vim.keymap.set("v", "<leader>y", "\"+y", { desc = "Yank into system clipboard" })
 
 vim.keymap.set("n", "Q", "<nop>")
 
@@ -39,4 +39,4 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { desc = "Make file executable", silent = true })
 
 -- tag jumping
-vim.keymap.set("n", "gd", "<C-]>", { desc = "Go to definition" } )
+vim.keymap.set("n", "gd", "<C-]>", { desc = "Go to definition" })
