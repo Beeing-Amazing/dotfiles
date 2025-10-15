@@ -1,10 +1,21 @@
-* {
+window#waybar.top * {
     border: none;
     border-radius: 0px;
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-size: 12px;
     min-height: 0;
+}
+window#waybar.bottom * {
+    border: none;
+    border-radius: 0px;
+    padding: 4px;
+    opacity: 0.96;
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    min-height: 0;
+    text-shadow: 1px 1px 2px black;
 }
 
 window#waybar {
@@ -165,3 +176,7 @@ label:focus {
     color: #ffffff;
 }
 
+#custom-splash {
+    background: transparent;
+    color: #ffffff;
+}
