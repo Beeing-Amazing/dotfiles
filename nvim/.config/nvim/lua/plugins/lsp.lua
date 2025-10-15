@@ -2,19 +2,37 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-        local lsp = require("lspconfig");
-        lsp.lua_ls.setup({}) -- lua
-        lsp.marksman.setup({}) -- markdown
-        lsp.clangd.setup({}) -- c++
-        lsp.jedi_language_server.setup({}) -- python
-        lsp.tinymist.setup({ -- typst
-            settings = {
-                formatterMode = "typstyle",
-                exportPdf = "onType",
-                semanticTokens = "disable"
-            }
-        })
+        local lsps = {
+            { "lua_ls" }, -- lua
+            { "marksman" }, -- markdown
+            { "jedi_language_server" }, --python
+            {
+                "clangd", -- c++
+                {
+                    init_options = {
+                        fallbackFlags = { "--std=c17" }
+                    }
+                }
+            },
+            {
+                "tinymist", -- typst
+                {
+                    settings = {
+                        formatterMode = "typstyle",
+                        exportPdf = "onType",
+                        semanticTokens = "disable"
+                    }
+                }
+            }, 
+        }
 
+        for _, lsp in pairs(lsps) do
+            local name, config = lsp[1], lsp[2]
+            vim.lsp.enable(name)
+            if config then
+                vim.lsp.config(name, config)
+            end
+        end
 
         vim.diagnostic.config({
             -- signs = {
