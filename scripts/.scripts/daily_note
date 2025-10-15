@@ -8,7 +8,7 @@ terminal=kitty
 
 opennote () { \
     datepath="$(date +%Y/%m/%d)"
-    name="$(command find "$folder" -type f -printf "%P\n" | grep "$datepath" | head -1)"
+    name="$(command find "$folder" -type f -printf "%P\n" | grep "$datepath" | grep ".md" | head -1)"
     setsid -f $terminal -e nvim $folder$name >/dev/null 2>&1
 }
 
