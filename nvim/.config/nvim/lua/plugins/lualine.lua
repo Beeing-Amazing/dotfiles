@@ -1,3 +1,7 @@
+local function inactive()
+    return "OFF"
+end
+
 return {
     {
         "nvim-lualine/lualine.nvim",
@@ -5,25 +9,51 @@ return {
 
         opts = function()
             local colors = {
-                color0 = "#092236",
-                color1 = "#c6a0f6",
-                color2 = "#eed49f",
-                color3 = "#a6da95",
-                color4 = "#7dc4e4",
-                color5 = "#ed8796",
-                color6 = "#181926",
+                fg = "#181926",
+                fg_alt = "#cad3f5",
+                mauve = "#c6a0f6",
+                yellow = "#eed49f",
+                green = "#a6da95",
+                sapphire = "#7dc4e4",
+                red = "#ed8796",
+                mantle = "#1e2030",
+                bg = "none"
             }
             return {
                 options = {
                     icons_enabled = true,
                     -- transparent theme
                     theme = {
-                        normal = { a = { fg = colors.color0, bg = colors.color1, gui = "bold" }, b = { fg = colors.color1, bg = "none" }, c = { bg = "none" } },
-                        insert = { a = { fg = colors.color0, bg = colors.color2, gui = "bold" }, b = { fg = colors.color2, bg = "none" }, c = { bg = "none" } },
-                        visual = { a = { fg = colors.color0, bg = colors.color3, gui = "bold" }, b = { fg = colors.color3, bg = "none" }, c = { bg = "none" } },
-                        replace = { a = { fg = colors.color0, bg = colors.color4, gui = "bold" }, b = { fg = colors.color4, bg = "none" }, c = { bg = "none" } },
-                        command = { a = { fg = colors.color0, bg = colors.color5, gui = "bold" }, b = { fg = colors.color5, bg = "none" }, c = { bg = "none" } },
-                        inactive = { a = { fg = colors.color5, bg = colors.color6, gui = "bold" }, b = { fg = colors.color5, bg = "none" }, c = { bg = "none" } },
+                        inactive = {
+                            a = { fg = colors.fg_alt, bg = colors.mantle, gui = "bold" },
+                            b = { fg = colors.fg_alt, bg = colors.bg },
+                            c = { bg = colors.bg }
+                        },
+                        normal = {
+                            a = { fg = colors.fg, bg = colors.mauve, gui = "bold" },
+                            b = { fg = colors.mauve, bg = colors.bg },
+                            c = { bg = colors.bg }
+                        },
+                        insert = {
+                            a = { fg = colors.fg, bg = colors.yellow, gui = "bold" },
+                            b = { fg = colors.yellow, bg = colors.bg },
+                            c = { bg = colors.bg }
+                        },
+                        visual = {
+                            a = { fg = colors.fg, bg = colors.green, gui = "bold" },
+                            b = { fg = colors.green, bg = colors.bg },
+                            c = { bg = colors.bg }
+                        },
+                        replace = {
+                            a = { fg = colors.fg, bg = colors.sapphire, gui = "bold" },
+                            b = { fg = colors.sapphire, bg = colors.bg },
+                            c = { bg = colors.bg }
+                        },
+                        command = {
+                            a = { fg = colors.fg, bg = colors.red, gui = "bold" },
+                            b = { fg = colors.red, bg = colors.bg },
+                            c = { bg = colors.bg }
+                        },
                     },
                     section_separators = "",
                     component_separators = "",
@@ -67,8 +97,19 @@ return {
                     },
                 },
                 inactive_sections = {
-                    lualine_a = {},
-                    lualine_b = {},
+                    lualine_a = {
+                        {
+                            inactive,
+                            separator = { right = "" },
+                        }
+                    },
+                    lualine_b = {
+                        {
+                            "filename",
+                            file_status = false,
+                            path = 0,
+                        },
+                    },
                     lualine_c = {},
                     lualine_x = {},
                     lualine_y = {},

@@ -8,6 +8,10 @@ return {
             sidebars = "transparent",
             floats = "transparent",
         },
+        -- https://www.reddit.com/r/neovim/comments/16gspa9/transparent_lualine_with_lazyvim_configuration/
+        on_colors = function(colors)
+            colors.bg_statusline = colors.none
+        end,
         transparent = true,
     },
 }
