@@ -8,7 +8,6 @@ these may or may not be up-to-date
 
 - Distro: Arch Linux
 - WM: [Hyprland](https://github.com/hyprwm/Hyprland)
-<!-- - Status: [waybar](https://github.com/Alexays/Waybar) -->
 - Notification Daemon: [dunst](https://dunst-project.org/)
 - Terminal Emulator: [kitty](https://sw.kovidgoyal.net/kitty/)
 - Shell: [fish](https://fishshell.com/)
