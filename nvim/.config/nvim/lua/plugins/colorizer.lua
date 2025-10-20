@@ -4,6 +4,7 @@ return {
         require("colorizer").setup({
             "*", -- enable for all filetypes
             markdown = { names = false }, -- override specific behavior
+            python = { names = false }, -- override specific behavior
         })
     end
 }
