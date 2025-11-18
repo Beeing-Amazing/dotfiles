@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+folder="$HOME/.local/share/sounds"
+sound_file="$folder/timer-alert.ogg"
+
+input_time=$(echo "" | dmenu -c -p "Set timer: " <&-)
+[ -z "$input_time" ] \
+    && notify-send "Timer not set" "It is currently $(date +%R)" \
+    && exit 0
+
+h=$(echo "$input_time" | grep -oE '[0-9]+h'     | tr -d 'h')
+m=$(echo "$input_time" | grep -oE '[0-9]+m(in)?' | grep -oE '[0-9]+')
+s=$(echo "$input_time" | grep -oE '[0-9]+s'     | tr -d 's')
+h=${h:-0}
+m=${m:-0}
+s=${s:-0}
+total=$(( h*3600 + m*60 + s ))
+
+if [ "$total" -le 0 ]; then
+    notify-send "Time not recognised: $input_time" 2>&1
+    exit 0
+fi
+
+end_time=$(date -d "now+ $total seconds" +%R)
+notify-send "Timer set for $end_time" \
+    && sleep $total \
+    && notify-send "Timer ended" "It is now $(date +%R)" -u "CRITICAL" \
+    && paplay "$sound_file"
