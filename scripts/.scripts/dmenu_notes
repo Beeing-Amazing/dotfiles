@@ -9,7 +9,7 @@ terminal=kitty
 
 newnote () { \
     ext="$1"
-    name="$(echo "" | dmenu -c -sb "#9ece6a" -p "Enter a name: " <&- | tr ' ' '-' | awk '{print tolower($0)}' )" || exit 0
+    name="$(echo "" | dmenu -c -sb "#9ece6a" -p "Enter a name: " <&- | tr ' ' '-' | awk '{print tolower($0)}' )"
     [ -z "$name" ] && exit 0
 
     datepath=$(date +%Y/%m/)
