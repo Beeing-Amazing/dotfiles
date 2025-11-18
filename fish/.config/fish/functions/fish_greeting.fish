@@ -1,3 +1,5 @@
 function fish_greeting
-    fastfetch
+    if not set -q TMUX
+        fastfetch
+    end
 end
