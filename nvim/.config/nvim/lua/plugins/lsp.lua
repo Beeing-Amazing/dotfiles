@@ -7,11 +7,20 @@ return {
             { "marksman" }, -- markdown
             { "jedi_language_server" }, --python
             {
-                "clangd", -- c++
+                "clangd", -- c, c++
                 {
-                    init_options = {
-                        fallbackFlags = { "--std=c++17" }
-                    }
+                    on_new = function(new_config)
+                        local buf = vim.api.nvim_get_current_buf()
+                        local ft = vim.bo[buf].filetype
+
+                        if ft == "cpp" or ft == "cxx" then
+                            new_config.init_options = {
+                                fallbackFlags = { "--std=c++17" }
+                            }
+                        else
+                            new_config.init_options = {}
+                        end
+                    end,
                 }
             },
             {
