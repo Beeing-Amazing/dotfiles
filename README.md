@@ -22,6 +22,10 @@ stow nvim
 - WM: [Hyprland](https://github.com/hyprwm/Hyprland)
 - Status: [waybar](https://github.com/Alexays/Waybar)
 - Notification Daemon: [dunst](https://dunst-project.org/)
+- Music:
+    - [mpd](https://www.musicpd.org/)
+    - [rmpc](https://rmpc.mierak.dev/)
+    - [mpdscribble](https://github.com/MusicPlayerDaemon/mpdscribble)
 
 ## terminal setup
 - [kitty](https://sw.kovidgoyal.net/kitty/) with [fish](https://fishshell.com/)
@@ -29,3 +33,4 @@ stow nvim
     - Plugin manager: [tpm](https://github.com/tmux-plugins/tpm)
 - [nvim](https://neovim.io/)
     - Plugin manager: [lazy.nvim](https://github.com/folke/lazy.nvim)
+
