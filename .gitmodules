@@ -1,0 +1,3 @@
+[submodule "rmpc/Music/utils"]
+	path = rmpc/Music/utils
+	url = https://github.com/Beeing-Amazing/music-utils
