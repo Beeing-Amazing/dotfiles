@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+list_timers () { \
+    timers=$(ps -ao pid,etime,cmd | sed -n "/dmenu_timer/,/sleep/p" | grep "sleep" | head -n -2)
+    [ -z "$timers" ] \
+        && notify-send "No active timers" \
+        && exit 0
+
+    curr_h=$(date +%H)
+    curr_m=$(date +%M)
+    curr_s=$(date +%S)
+    fancy_out=$( \
+        echo "$timers" | tr ":" " " \
+        | awk -F" " -v now_h="$curr_h" -v now_m="$curr_m" -v now_s="$curr_s" '
+        {
+            pid=$1;
+            rem=$5-($2*60+$3);
+            add_s=rem+now_s;
+            add_m=int(add_s / 60)+now_m;
+            add_h=int(add_m / 60)+now_h;
+            print pid " - " rem "s until " add_h%24 ":" add_m%60
+        }'
+    )
+    echo "$fancy_out"
+}
+
+selected () { \
+    timers=$(list_timers)
+    [ -z "$timers" ] && exit
+    choice=$(echo "$(list_timers)" | dmenu -i -c -l 3 -p "Active timer to kill: " )
+    choice_pid=$(echo $choice | awk '{print $1}')
+    if ! [ -z "$choice_pid" ] && [ "${choice}" != "${choice_pid}" ]; then
+        choice_end=$(echo "$choice" | awk '{print $5}')
+        kill $choice_pid
+        notify-send "Stopped timer for $choice_end" && exit
+    else
+        notify-send "Canceled timer kill" && exit
+    fi
+}
+
+selected
