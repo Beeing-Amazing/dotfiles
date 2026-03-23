@@ -32,6 +32,9 @@ vim.opt.signcolumn = "yes"
 
 vim.opt.backspace = {"start", "eol", "indent"}
 
+-- vim.opt.list = true
+-- vim.opt.listchars = { trail = '·', nbsp = '␣' }
+
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 

@@ -20,6 +20,7 @@ require("config.options")
 require("config.keymaps")
 require("config.templates")
 
+
 -- Setup lazy.nvim
 require("lazy").setup({
     spec = {

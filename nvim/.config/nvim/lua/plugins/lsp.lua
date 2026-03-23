@@ -6,8 +6,7 @@ return {
             { "lua_ls" }, -- lua
             { "marksman" }, -- markdown
             { "jedi_language_server" }, --python
-            {
-                "clangd", -- c, c++
+            { "clangd", -- c, c++
                 {
                     on_new = function(new_config)
                         local buf = vim.api.nvim_get_current_buf()
@@ -23,8 +22,7 @@ return {
                     end,
                 }
             },
-            {
-                "tinymist", -- typst
+            { "tinymist", -- typst
                 {
                     settings = {
                         formatterMode = "typstyle",
