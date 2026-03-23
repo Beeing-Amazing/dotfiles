@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+on () { \
+    conn="$1"
+    password=$(echo $($HOME/.scripts/fuzzel/fuzzel_askpass))
+    sudo -S nmcli con modify $conn ipv4.ignore-auto-dns no <<< echo $password
+    sudo -S nmcli g reload dns-rc <<< echo $password
+    sudo -S systemctl restart NetworkManager <<< echo $password
+    notify-send "DNS switched on"
+}
+
+off () { \
+    conn="$1"
+    password=$(echo $($HOME/.scripts/fuzzel/fuzzel_askpass))
+    echo $password | sudo -S nmcli con modify $conn ipv4.ignore-auto-dns yes
+    echo $password | sudo -S nmcli g reload dns-rc
+    echo $password | sudo -S systemctl restart NetworkManager
+    notify-send "DNS switched off"
+}
+
+switch () { \
+    conn=$(nmcli connection show | head -n 2 | tail -n 1 | awk '{print $1;}')
+    choice=$(echo -e "ON\nOFF" | fuzzel --dmenu -l 2 -p "DNS Switch: ")
+    choice_awk=$(echo $choice | awk '{print tolower($0);}')
+case $choice_awk in
+    on) on $conn ;;
+    off) off $conn ;;
+    *) notify-send "DNS switch canceled" && exit ;;
+esac
+}
+
+switch
+

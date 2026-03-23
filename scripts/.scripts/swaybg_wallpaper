@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+wallpapers_base="$HOME/Pictures/wallpaper"
+random=0
+choice="emesan_desu_powerlines.png"
+
+if [ $random -ne 0 ]; then
+    image=$(find "$wallpapers_base/" -type f | shuf -n 1 | tail -n 1)
+    swaybg -i "$image" -m fill
+else
+    swaybg -i "$wallpapers_base/$choice" -m fill
+fi

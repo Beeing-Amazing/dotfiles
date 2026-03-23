@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
 
-folder="$HOME/.local/share/sounds"
 scripts_folder="$HOME/.scripts"
-sound_file="$folder/timer-alert.ogg"
 
-input_time=$(echo "" | dmenu -c -p "Set timer: " <&-)
+input_time=$(echo "" | dmenu -l 0 -c -p "Set timer: " <&-)
 [ -z "$input_time" ] \
     && notify-send "Timer not set" "It is currently $(date +%R)" \
     && exit 0
 
-h=$(echo "$input_time" | grep -oE '[0-9]+h'     | tr -d 'h')
-m=$(echo "$input_time" | grep -oE '[0-9]+m(in)?' | grep -oE '[0-9]+')
-s=$(echo "$input_time" | grep -oE '[0-9]+s'     | tr -d 's')
+h=$(echo "$input_time" | grep -oE '[0-9]+h'         | tr -d 'h')
+m=$(echo "$input_time" | grep -oE '[0-9]+m(in)?'    | grep -oE '[0-9]+')
+s=$(echo "$input_time" | grep -oE '[0-9]+s'         | tr -d 's')
 h=${h:-0}
 m=${m:-0}
 s=${s:-0}

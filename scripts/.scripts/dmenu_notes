@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shamelessly copied from https://github.com/BreadOnPenguins/scripts/blob/master/dmenu_notes
 
-folder="$HOME/Notes/"
+folder="$HOME/Vaults/Notes/"
 terminal=kitty
 
 # TODO: newnote in parent folder based on date, acc to old format

@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-folder="$HOME/"
-terminal=kitty
-
 on () { \
     conn="$1"
     sudo -A nmcli con modify $conn ipv4.ignore-auto-dns no

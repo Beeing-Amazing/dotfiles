@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+list_timers () { \
+    fancy_out=$(ps -eo pid,etime,cmd | awk '
+    /dmenu_timer/ {
+        parent_pid = $1
+        next
+    }
+    /sleep/ && parent_pid {
+        sleep_pid = $1
+        etime = $2
+
+        n = split(etime, t, ":")
+        if (n == 2) {
+            elapsed = t[1]*60 + t[2]
+        } else if (n == 3) {
+            elapsed = t[1]*3600 + t[2]*60 + t[3]
+        }
+
+        duration = $NF
+        rem = duration - elapsed
+        if (rem < 0) rem = 0
+
+        now = systime()
+        eta = now + rem
+
+        cmd = "date -d @" eta " +%H:%M"
+        cmd | getline timestr
+        close(cmd)
+
+        print parent_pid " - " rem "s until " timestr
+        parent_pid = ""
+    }')
+    [ -z "$fancy_out" ] \
+        && notify-send "No active timers" \
+        && exit 0
+    echo $fancy_out
+}
+
+selected () { \
+    timers=$(list_timers)
+    [ -z "$timers" ] && exit
+    choice=$(echo $timers | dmenu -i -c -l 3 -p "Active timer to kill: " )
+    choice_pid=$(echo $choice | awk '{print $1}')
+    if ! [ -z "$choice_pid" ] && [ "${choice}" != "${choice_pid}" ]; then
+        choice_end=$(echo "$choice" | awk '{print $5}')
+        kill $choice_pid
+        notify-send "Stopped timer for $choice_end" && exit
+    else
+        notify-send "Canceled timer kill" && exit
+    fi
+}
+
+selected
