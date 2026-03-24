@@ -1,7 +1,13 @@
-# 
+---
+id: daily_{{date}}
+aliases: []
+tags:
+  - daily
+created: {{date}}
+---
 
-## TODO:
-- [ ] Task
+# TODO
+- [ ] Study
 
-## Daily Note
+# Ramblings
 

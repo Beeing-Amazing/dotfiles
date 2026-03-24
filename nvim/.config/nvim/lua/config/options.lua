@@ -3,6 +3,7 @@ vim.cmd("let g:netwr_banner = 0")
 vim.opt.guicursor = ""
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
+vim.opt.conceallevel = 1
 
 vim.opt.nu = true
 vim.opt.rnu = true
