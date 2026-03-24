@@ -1,0 +1,32 @@
+font: Caskaydia Cove Nerd Font 12
+background: "#131317dd"
+color: "#e5e1e7dd"
+border: "#bfc1ff77"
+separator: " > "
+border_width: 2
+corner_r: 10
+padding: 15 # Defaults to corner_r
+rows_per_column: 5 # No limit by default
+column_padding: 25 # Defaults to padding
+
+# Anchor and margin
+anchor: center # One of center, left, right, top, bottom, bottom-left, top-left, etc.
+# Only relevant when anchor is not center
+margin_right: 0
+margin_bottom: 0
+margin_left: 0
+margin_top: 0
+
+menu:
+  - key: "k"
+    desc: Kill
+    cmd: ~/.scripts/fuzzel/fuzzel_kill
+  - key: "t"
+    desc: Start Timer
+    cmd: ~/.scripts/fuzzel/fuzzel_timer
+  - key: "s"
+    desc: Switch Output
+    cmd: ~/.scripts/fuzzel/fuzzel_switchoutput
+  - key: "d"
+    desc: Switch DNS
+    cmd: ~/.scripts/fuzzel/fuzzel_switchdns
