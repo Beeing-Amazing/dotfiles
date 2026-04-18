@@ -1,0 +1,5 @@
+# quickshell/themes/default/qmldir
+
+
+DefaultTheme 1.0 DefaultTheme.qml
+
