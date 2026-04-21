@@ -30,10 +30,10 @@ stow nvim
 
 ## terminal setup
 - [kitty](https://sw.kovidgoyal.net/kitty/) with [fish](https://fishshell.com/)
-- [nvim](https://neovim.io/)
+- [nvim](https://neovim.io/) >= v0.12
     - Plugin manager: [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 # roadmap
-- [ ] eww widgets for clock, battery, tray, calendar, notifs, app launcher
+- [ ] quickshell widgets for clock, battery, tray, calendar, notifs, app launcher
 - [ ] wallpaper manager
 - [ ] browser landing page and small css tweaks
