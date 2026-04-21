@@ -15,6 +15,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
 require("config.autocmds")
 require("config.options")
 require("config.keymaps")
@@ -25,14 +26,42 @@ require("config.templates")
 require("lazy").setup({
     spec = {
         -- add your plugins here
+        { "folke/tokyonight.nvim",
+            lazy = false,
+            priority = 1000,
+            opts = {
+                style = "night",
+                transparent = true,
+                styles = {
+                    sidebars = "transparent",
+                    floats = "transparent",
+                },
+                -- https://www.reddit.com/r/neovim/comments/16gspa9/transparent_lualine_with_lazyvim_configuration/
+                on_colors = function(colors)
+                    colors.bg_statusline = colors.none
+                end,
+            },
+        },
+        { 'nvim-treesitter/nvim-treesitter',
+            build = ':TSUpdate',
+            lazy = false,
+        },
         { import = "plugins" },
     },
-    -- Configure any other settings here. See the documentation for more details.
-    -- colorscheme that will be used when installing plugins.
-
     -- automatically check for plugin updates
     checker = { enabled = true },
 })
 
-vim.cmd.colorscheme("tokyonight")
-require("config.ui")
+-- after v0.12 start vim.treesitter manually instead of nvim-treesitter.setup()
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function(args)
+        pcall(vim.treesitter.start, args.buf)
+    end,
+})
+
+
+-- Setup lsp
+require("lsp")
+
+
+vim.cmd[[colorscheme tokyonight]]

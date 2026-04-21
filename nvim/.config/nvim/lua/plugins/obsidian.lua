@@ -2,15 +2,16 @@ return {
     -- NOTE: community fork of epwalsh/obsidian.nvim
     "obsidian-nvim/obsidian.nvim",
     version = "*",  -- recommended, use latest release instead of latest commit
+    ft = "markdown",
     dependencies = {
         -- Required.
         "nvim-lua/plenary.nvim",
         -- Recommended
         "saghen/blink.cmp",
-        "nvim-treesitter/nvim-treesitter",
+        -- "nvim-treesitter/nvim-treesitter",
         "nvim-telescope/telescope.nvim",
     },
-    event = { "BufReadPre", "BufNewFile" },
+    -- event = { "BufReadPre", "BufNewFile" },
     opts = {
         legacy_commands = false,
         workspaces = {
@@ -32,6 +33,22 @@ return {
                     },
                 }
             },
+            {
+                name = "no-vault",
+                path = function()
+                    -- alternatively use the CWD:
+                    -- return assert(vim.fn.getcwd())
+                    return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
+                end,
+                overrides = {
+                    notes_subdir = vim.NIL,  -- have to use 'vim.NIL' instead of 'nil'
+                    new_notes_location = "current_dir",
+                    templates = {
+                        folder = vim.NIL,
+                    },
+                    frontmatter = { enabled = false },
+                },
+            },
         },
         templates = {
             folder = "templates"
@@ -41,6 +58,6 @@ return {
         --     min_chars = 2
         -- },
         frontmatter = { enabled = false },
-        link = { style = "wiki" },
+        link = { style = "markdown" },
     }
 }
