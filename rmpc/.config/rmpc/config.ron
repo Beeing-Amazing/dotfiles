@@ -129,13 +129,13 @@
                     ),
                     (size: "30%", borders: "NONE", pane: Split(direction: Vertical, panes: [
                                 (size: "0.45r", borders: "ALL", pane: Pane(AlbumArt)),
-                                (size: "100%", borders: "NONE", pane: Pane(Cava)),
+                                (size: "70%", borders: "NONE", pane: Pane(Lyrics), vertical_align: Bottom),
                             ])
                     ),
                 ])
         ),
         (name: "Artists", pane: Split(direction: Horizontal, panes: [
-                    (size: "100%", borders: "ALL", pane: Pane(Artists)),
+                    (size: "100%", borders: "ALL", pane: Pane(AlbumArtists)),
                 ])
         ),
         (name: "Albums", pane: Split(direction: Horizontal, panes: [
