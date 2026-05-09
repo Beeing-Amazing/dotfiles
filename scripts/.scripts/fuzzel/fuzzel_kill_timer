@@ -34,13 +34,13 @@ list_timers () { \
     [ -z "$fancy_out" ] \
         && notify-send "No active timers" \
         && exit 0
-    echo $fancy_out
+    echo "$fancy_out"
 }
 
 selected () { \
     timers=$(list_timers)
     [ -z "$timers" ] && exit
-    choice=$(echo $timers | fuzzel --dmenu -l 3 -p "Active timer to kill: " )
+    choice=$(printf '%s\n' "$timers" | fuzzel --dmenu -l 3 -p "Active timer to kill: " )
     choice_pid=$(echo $choice | awk '{print $1}')
     if ! [ -z "$choice_pid" ] && [ "${choice}" != "${choice_pid}" ]; then
         choice_end=$(echo "$choice" | awk '{print $5}')
