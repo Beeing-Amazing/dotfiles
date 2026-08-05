@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-folder="$HOME/Notes/"
+folder="$HOME/Vaults/Notes/"
 template="$HOME/.config/nvim/templates/daily_note.md"
 terminal=kitty
 

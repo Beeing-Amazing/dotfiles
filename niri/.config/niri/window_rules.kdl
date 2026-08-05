@@ -33,6 +33,15 @@ window-rule {
 }
 
 window-rule {
+    match app-id="waywall"
+    opacity 1.0
+    open-maximized-to-edges true
+    open-fullscreen true
+    open-focused true
+}
+
+
+window-rule {
     match app-id="vesktop" is-floating=false
     open-maximized true
 }

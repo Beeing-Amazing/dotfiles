@@ -8,7 +8,6 @@
     cache_dir: Some("/tmp/rmpc/cache"),
     lyrics_dir: Some("~/Music/mpd"),
     on_song_change: [
-        "~/.config/rmpc/notify",
         "~/.config/rmpc/scripts/fetch_song_lyrics.sh",
     ],
     on_resize: None,
@@ -91,6 +90,7 @@
             "D":         Delete,
             "B":         ShowInfo,
             "/":         EnterSearch,
+            "<C-f>":     EnterSearch,
             "<C-c>":     Close,
             "<Esc>":     Close,
         },
