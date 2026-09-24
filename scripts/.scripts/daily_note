@@ -1,38 +1,107 @@
 #!/usr/bin/env bash
 
-folder="$HOME/Vaults/Notes/"
+folder="$HOME/Vaults/dailies/"
 template="$HOME/.config/nvim/templates/daily_note.md"
+sock="/tmp/nvim_daily.sock"
 terminal=kitty
 
 
-
-opennote () { \
-    datepath="$(date +%Y/%m/%d_daily.md)"
-    name="$(command find "$folder" -type f -printf "%P\n" | grep "$datepath" | head -1)"
-    setsid -f $terminal -e nvim $folder$name >/dev/null 2>&1
+today_path() {
+    printf '%s/%s/%s_daily.md' \
+        "$(date +%Y)" \
+        "$(date +%m)" \
+        "$(date +%d)"
 }
 
-newnote () { \
-    datepath="$(date +%Y/%m/)"
-    fullpath="$folder$datepath"
-    filename="${fullpath}$(date +%d)_daily.md"
-    text="# $(date +%F)"
+findnote() {
+    local datepath
+    datepath="$(today_path)"
+
+    find "$folder" -type f -printf '%P\n' |
+        grep -Fx "$datepath" |
+        head -n 1
+}
+
+focus_or_spawn_editor() {
+    local windows
+    windows="$(niri msg --json windows)"
+
+    local window_id
+    window_id="$(
+        jq -r ' .[]
+            | select(.title == "daily-note")
+            | .id
+        ' <<< "$windows" |
+        head -n 1
+    )"
+
+    if [[ -n "$window_id" ]]; then
+        niri msg action focus-window --id "$window_id"
+    else
+        local filename_full="$folder$(findnote)"
+
+        niri msg action spawn-sh \
+            -- "$terminal --title 'daily-note' -e nvim --listen '$sock' '$filename_full'"
+
+    fi
+}
+
+toggle_editor() {
+    local focused
+    focused="$(niri msg --json focused-window)"
+
+    local title
+    title="$(jq -r '.title // ""' <<< "$focused")"
+
+    local window_id
+    window_id="$(jq -r '.id' <<< "$focused")"
+
+    local filename
+    filename="$(basename "$(today_path)")"
+
+    if [[ "$title" == "daily-note" ]]; then
+
+        # Save and quit Neovim.
+        if [[ -S "$sock" ]]; then
+            nvim --server "$sock" --remote-send ':wqa<CR>'
+        fi
+
+        # sleep 0.1
+        # niri msg action close-window --id "$window_id"
+
+    else
+        focus_or_spawn_editor
+    fi
+}
+
+newnote() {
+    local relative_path
+    relative_path="$(today_path)"
+
+    local filename="$folder$relative_path"
+    local fullpath
+    fullpath="$(dirname "$filename")"
+
+    local text="# $(date +%F)"
 
     mkdir -p "$fullpath"
 
-    cp $template $filename
-    sed -i "1s/# /$text/" $filename
-    setsid -f $terminal -e nvim $filename >/dev/null 2>&1
+    cp "$template" "$filename"
+    sed -i "1s/# .*/$text/" "$filename"
+
+    # setsid "$terminal" --title "daily-note" -e \
+    #     nvim --listen "$sock" "$filename" \
+    #     >/dev/null 2>&1 &
+    niri msg action spawn-sh \
+        -- "$terminal --title 'daily-note' -e nvim --listen '$sock' '$filename'"
 }
 
-exists () { \
-    datepath="$(date +%Y/%m/%d_daily)"
-created="$(find "$folder" -type f -printf "%P\n" | grep "$datepath" | head -1)"
-if [[ -n "$created" ]]; then
-    opennote
-else
-    newnote
-fi
+exists() {
+    if [[ -z "$(findnote)" ]]; then
+        newnote
+    else
+        toggle_editor
+    fi
 }
 
 exists

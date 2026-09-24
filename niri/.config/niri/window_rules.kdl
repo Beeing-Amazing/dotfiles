@@ -12,6 +12,8 @@ window-rule {
     // - host Firefox (app-id is "firefox")
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    match app-id=r#"librewolf$"# title="^Picture-in-Picture$"
+    match app-id=r#"chromium$"# title="^Picture-in-Picture$"
     open-floating true
 }
 
@@ -51,6 +53,14 @@ window-rule {
     open-maximized true
 }
 
+window-rule {
+    match title="daily-note"
+    opacity 0.7
+    open-focused true
+    open-floating true
+    default-column-width { proportion 0.4; }
+    default-window-height { proportion 0.8; }
+}
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {

@@ -25,6 +25,9 @@ binds {
     Mod+D                { spawn-sh "wlr-which-key config.yaml"; }
     Mod+G                { spawn-sh "wlr-which-key scripts.yaml"; }
 
+    // Keybinds for named windows
+    Mod+N                { spawn-sh "~/.scripts/daily_note"; }
+
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
@@ -242,7 +245,7 @@ binds {
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
     // rather than stacked on top of each other.
-    Mod+W { toggle-column-tabbed-display; }
+    // Mod+W { toggle-column-tabbed-display; }
 
     // Actions to switch layouts.
     // Note: if you uncomment these, make sure you do NOT have
