@@ -74,8 +74,7 @@ return {
                     templates = {
                         folder = vim.NIL,
                     },
-                    -- frontmatter = { enabled = false },
-                    disable_frontmatter = true,
+                    frontmatter = { enabled = false },
                 },
             },
         },
