@@ -96,6 +96,6 @@ return {
         vim.cmd("Obsidian dailies")
     end, { desc = "List dailies", }),
     vim.keymap.set("n", "<leader>ny", function()
-        vim.cmd("Obsidian yesterday")
+        vim.cmd("Obsidian today -1")
     end, { desc = "Yesterday's note", }),
 }
