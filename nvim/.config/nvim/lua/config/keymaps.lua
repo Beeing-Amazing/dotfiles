@@ -40,6 +40,9 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { desc = "Make file exe
 
 -- tag jumping
 vim.keymap.set("n", "gd", "<C-]>", { desc = "Go to definition" })
+vim.keymap.set("n", "gl", vim.diagnostic.open_float,                          { desc = "Show line diagnostics" })
+vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end,  { desc = "Next diagnostic" })
+vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, { desc = "Prev diagnostic" })
 
 -- split movement
 -- vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
