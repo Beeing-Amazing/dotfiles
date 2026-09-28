@@ -34,7 +34,7 @@ vim.keymap.set("v", "<leader>y", "\"+y", { desc = "Yank into system clipboard" }
 vim.keymap.set("n", "Q", "<nop>")
 
 -- project management
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open netrw" })
+-- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open netrw" })
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word under cursor" })
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { desc = "Make file executable", silent = true })
 
